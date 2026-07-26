@@ -1,0 +1,71 @@
+from controllers.ProfileController import ProfileController
+
+
+def init_profile_command(subparsers):
+    
+    profile_parser = subparsers.add_parser(
+        "profile", help = "Administrar Perfiles"
+    )
+
+    profile_subparsers = profile_parser.add_subparsers(
+        dest = "profile_command", required = True
+    )
+
+    #CREATE PARSER
+
+    create_parser = profile_subparsers.add_parser(
+        "create", help = "Crear un perfil"
+    )
+
+    create_parser.add_argument(
+        "name", help = "Nombre del perfil",
+    )
+
+    create_parser.set_defaults(handler = ProfileController.create)
+
+    #DELETE PARSER
+
+    delete_parser = profile_subparsers.add_parser(
+        "delete", help = "Eliminar un perfil"
+    )
+
+    delete_parser.add_argument(
+        "name", help = "Nombre del perfil"
+    )
+
+    delete_parser.set_defaults(handler = ProfileController.delete)
+
+    #USE PARSER
+
+    use_parser = profile_subparsers.add_parser(
+        "use", help = "Cambiar al perfil"
+    )
+
+    use_parser.add_argument("name", help = "Nombre del perfil")
+
+    use_parser.set_defaults(handler = ProfileController.use)
+
+    #LIST PARSER
+
+    list_parser = profile_subparsers.add_parser(
+        "list", help = "Ver lista de perfiles"
+
+    )
+    
+    list_parser.set_defaults(handler = ProfileController.list)
+
+    #VIEW PARSER
+
+    view_parser = profile_subparsers.add_parser(
+        "view", help = "Ver lista de comandos de un perfil"
+    )
+
+    view_parser.add_argument("name", help = "nombre del perfil")
+
+    view_parser.set_defaults(handler = ProfileController.view)
+
+    exit_parser = profile_subparsers.add_parser(
+        "exit", help = "Salir del perfil actual"
+    )
+
+    exit_parser.set_defaults(handler = ProfileController.exit)
