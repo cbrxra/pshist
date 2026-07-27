@@ -1,6 +1,6 @@
 # PowerShell History CLI
 
-![DEMO](.github\assets\image1.webp)
+![DEMO](.github\assets\demo.jpg)
 
 PowerShell History is a Python-based CLI for tracking and managing PowerShell command history using profiles. It allows you to maintain separate command histories for different projects or environments, making it easier to organize and reuse your commands.
 
