@@ -100,11 +100,12 @@ function pshist {{
         path_default.mkdir(parents = True, exist_ok = True)
         path_history.touch(exist_ok = True)
 
+        name_profile = path_default.name
+
         if not ProfileRepository().exists(name_defaultprofile):
             ConfigRepository().set_default_profile(name_profile)
 
         if name_defaultprofile == "default" and os.path.getsize(path_history) == 0:  
-            name_profile = path_default.name
             history_powershell = PowerShellService().get_history()
             ProfileRepository().append_history(name_profile, history_powershell)
 

@@ -2,27 +2,23 @@
 from repositories.ProfileRepository import ProfileRepository
 from repositories.ConfigRepository import ConfigRepository
 
+from exceptions import ProfileNotFoundError, ConfigNotFoundError
+
 class ConfigService:
     
     @staticmethod
-    def set_curretprofile(name_profile :str) -> bool:
+    def set_defaultprofile(name_profile :str) -> None:
 
-        if not ProfileRepository().exists(name_profile):
-            return False
-        
-        ConfigRepository().set_current_profile(name_profile)
-
-        return True
-    
-    @staticmethod
-    def set_defaultprofile(name_profile :str) -> bool:
+        last_profile_default_name = ConfigRepository().get_default_profile()
         
         if not ProfileRepository().exists(name_profile):
-            return False
-        
+            raise ProfileNotFoundError(name_profile)
+
+        if last_profile_default_name == name_profile:
+            return
+
         ConfigRepository().set_default_profile(name_profile)
 
-        return True
 
     @staticmethod
     def get_currentprofile() -> str | None:
@@ -34,11 +30,11 @@ class ConfigService:
         return name_profile
     
     @staticmethod
-    def get_defaultprofile() -> str | None:
+    def get_defaultprofile() -> str:
         name_profile = ConfigRepository().get_default_profile()
         
         if not ProfileRepository().exists(name_profile):
-            return None
+            raise ProfileNotFoundError(name_profile)
         
         return name_profile
 
