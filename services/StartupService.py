@@ -13,7 +13,6 @@ from repositories.ConfigRepository import ConfigRepository
 
 class StartupService:
     
-    
     def initialize(self):
         APP_DIR.mkdir(exist_ok = True)
         PROFILES_DIR.mkdir(parents = True, exist_ok = True)
@@ -32,7 +31,7 @@ class StartupService:
             
             if not is_hidden(TEMP_DIR):    
                 hide(TEMP_DIR)
-
+                
         except FileNotFoundError as e:
             print(f"[WARN] No se pudo ocultar: {e}")
             

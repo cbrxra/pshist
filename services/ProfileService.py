@@ -5,11 +5,14 @@ from repositories.ConfigRepository import ConfigRepository
 import os
 
 from exceptions import ProfileAlreadyExistsError, ProfileNotFoundError, DefaultProfileDeleteError
+from utils.strings import normalize_str
 
 class ProfileService:
     
     @staticmethod
     def create(name_profile: str) -> None: 
+        
+        name_profile = normalize_str(name_profile)
 
         if ProfileRepository().exists(name_profile):    
             raise ProfileAlreadyExistsError(name_profile)

@@ -2,7 +2,7 @@
 from repositories.ProfileRepository import ProfileRepository
 from repositories.ConfigRepository import ConfigRepository
 
-from exceptions import ProfileNotFoundError, ConfigNotFoundError
+from exceptions import ProfileNotFoundError
 
 class ConfigService:
     
