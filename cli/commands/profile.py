@@ -69,3 +69,21 @@ def init_profile_command(subparsers):
     )
 
     exit_parser.set_defaults(handler = ProfileController.exit)
+
+    # RENAME PROFILE
+
+    rename_parser = profile_subparsers.add_parser(
+        "rename", help = "Renombrar un perfil"
+    )
+
+    rename_parser.add_argument(
+        "name", help = "nombre actual del perfil"
+    )
+
+    rename_parser.add_argument(
+            "new_name", help = "nombre actual del perfil"
+    )
+
+    rename_parser.set_defaults(handler = ProfileController.rename)
+    
+        

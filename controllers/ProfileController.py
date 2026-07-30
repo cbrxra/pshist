@@ -69,3 +69,11 @@ class ProfileController:
             print(YELLOW + f"  Saliendo del Perfil" + RESET)
         except TerminalError as e:
             print(RED + f"{e}" + RESET)
+
+    @staticmethod
+    def rename(args):
+        try:
+            ProfileService().rename(args.name, args.new_name)
+            print(GREEN + f"  Perfil '{args.name}' cambiado a '{args.new_name}'" + RESET)
+        except TerminalError as e:
+            print(RED + f"{e}" + RESET)

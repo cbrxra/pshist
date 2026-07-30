@@ -79,6 +79,28 @@ class ProfileService:
         
         ConfigRepository().set_current_profile(default_profile)
 
+    @staticmethod
+    def rename(name_profile :str, new_name_profile :str) -> None:
+
+        current_profile = ConfigRepository().get_current_profile()
+        default_profile = ConfigRepository().get_default_profile()
+
+        if name_profile == default_profile:
+            raise DefaultProfileDeleteError(name_profile)
+        
+        if not ProfileRepository().exists(name_profile):
+            raise ProfileNotFoundError(name_profile)
+
+        if ProfileRepository.exists(new_name_profile):
+            raise ProfileAlreadyExistsError(new_name_profile)
+        
+        ProfileRepository().rename(name_profile, new_name_profile)
+
+        if name_profile == current_profile:
+            ConfigRepository().set_current_profile(new_name_profile)
+
+        
+
         
 
         

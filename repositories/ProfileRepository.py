@@ -53,3 +53,8 @@ class ProfileRepository:
 
         with open(path, "a", encoding = "utf-8") as file:
             file.write("\n".join(commands) + "\n")
+
+    @staticmethod
+    def rename(name_profile :str, new_name_profile :str):
+        path = PROFILES_DIR / name_profile
+        path.rename(PROFILES_DIR / new_name_profile)
