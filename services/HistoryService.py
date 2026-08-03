@@ -4,7 +4,7 @@ from repositories.ConfigRepository import ConfigRepository
 
 from services.PowershellService import PowerShellService
 
-from exceptions import ProfileNotFoundError, HistoryAddCountError
+from exceptions import ProfileNotFoundError, HistoryAddCountError, HistoryDeleteIndexError, HistoryDeleteIndexLenError, HistoryEmptyError
 
 class HistoryService:
     
@@ -64,7 +64,53 @@ class HistoryService:
 
         return save_history
 
+    @staticmethod
+    def delete_index( index :int, name_profile :str | None = None):
 
-            
+        if name_profile is None:
+            name_profile = ConfigRepository().get_current_profile()
 
+        if not ProfileRepository().exists(name_profile):
+            raise ProfileNotFoundError(name_profile)
+
+        if index < 0:
+            raise HistoryDeleteIndexError(index)
+
+        data = ProfileRepository().get_history(name_profile)
+
+        len_data = len(data)
+
+        if len_data == 0:
+            raise HistoryEmptyError()
+
+        if index > len_data:
+            raise HistoryDeleteIndexLenError(index, len_data)
+
+        command_delete = f" - {index} {data[index]}"
+
+        data.pop(index)
+
+        ProfileRepository().overwrite_history(name_profile, data)
+
+        return command_delete
+
+    @staticmethod
+    def delete_all(name_profile :str | None = None):
+
+        if name_profile is None:
+            name_profile = ConfigRepository().get_current_profile()
+
+        if not ProfileRepository().exists(name_profile):
+            raise ProfileNotFoundError(name_profile)
+
+        data = ProfileRepository().get_history(name_profile)
+
+        len_data = len(data)
+
+        if len_data == 0:
+            raise HistoryEmptyError()
+
+        ProfileRepository().delete_history(name_profile)
+
+        
         

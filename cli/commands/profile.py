@@ -1,8 +1,8 @@
 from controllers.ProfileController import ProfileController
+from argparse import _SubParsersAction
 
+def init_profile_command(subparsers :_SubParsersAction):
 
-def init_profile_command(subparsers):
-    
     profile_parser = subparsers.add_parser(
         "profile", help = "Administrar Perfiles"
     )
@@ -81,9 +81,9 @@ def init_profile_command(subparsers):
     )
 
     rename_parser.add_argument(
-            "new_name", help = "nombre actual del perfil"
+        "new_name", help = "nombre actual del perfil"
     )
 
     rename_parser.set_defaults(handler = ProfileController.rename)
     
-        
+    

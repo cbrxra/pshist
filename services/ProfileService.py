@@ -99,9 +99,4 @@ class ProfileService:
         if name_profile == current_profile:
             ConfigRepository().set_current_profile(new_name_profile)
 
-        
-
-        
-
-        
-        
+    

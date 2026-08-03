@@ -31,9 +31,12 @@ class ProfileController:
 
         try:
             data = ProfileService().view(args.name)
+            ancho = len(str(len(data)))
+
+            data = [f"{GREEN}{i:<{ancho}}{RESET} {comando}" for i, comando in enumerate(data, 0)]
 
             if data:
-                print(GREEN +  f"  Comandos del perfil '{args.name}': " + RESET + "\n\n- " + WHITE + "\n- ".join(data) + RESET)
+                print(GREEN +  f"  Comandos del perfil '{args.name}': " + RESET + "\n\n - " + WHITE + "\n - ".join(data) + RESET)
 
             else:
                 print(YELLOW +  f"  El perfil '{args.name}' aun no tiene comandos" +  RESET)

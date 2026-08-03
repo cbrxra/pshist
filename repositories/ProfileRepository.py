@@ -55,6 +55,18 @@ class ProfileRepository:
             file.write("\n".join(commands) + "\n")
 
     @staticmethod
+    def overwrite_history(name_profile: str, commands: list[str]):
+        path = PROFILES_DIR / name_profile / "History.txt"
+
+        with open(path, "w", encoding = "utf-8") as file:
+            file.write("\n".join(commands) + "\n")
+
+    @staticmethod
+    def delete_history(name_profile :str):
+        path = PROFILES_DIR / name_profile / "History.txt"
+        Path(path).write_text("", encoding = "utf-8")
+
+    @staticmethod
     def rename(name_profile :str, new_name_profile :str):
         path = PROFILES_DIR / name_profile
         path.rename(PROFILES_DIR / new_name_profile)
