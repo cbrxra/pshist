@@ -80,6 +80,18 @@ class ProfileService:
         ConfigRepository().set_current_profile(default_profile)
 
     @staticmethod
+    def reload():
+
+        name_profile = ConfigRepository().get_current_profile()
+
+        if not ProfileRepository().exists(name_profile):
+            raise ProfileNotFoundError(name_profile)
+
+        history = ProfileRepository().get_history(name_profile)
+
+        PowerShellService().save_history(history)
+
+    @staticmethod
     def rename(name_profile :str, new_name_profile :str) -> None:
 
         current_profile = ConfigRepository().get_current_profile()

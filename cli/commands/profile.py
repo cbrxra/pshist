@@ -64,6 +64,8 @@ def init_profile_command(subparsers :_SubParsersAction):
 
     view_parser.set_defaults(handler = ProfileController.view)
 
+    #Exit Parser
+
     exit_parser = profile_subparsers.add_parser(
         "exit", help = "Salir del perfil actual"
     )
@@ -86,4 +88,10 @@ def init_profile_command(subparsers :_SubParsersAction):
 
     rename_parser.set_defaults(handler = ProfileController.rename)
     
-    
+    #RELOAD
+
+    reload_parser = profile_subparsers.add_parser(
+        "reload", help = "Recarga el perfil actual"
+    )
+
+    reload_parser.set_defaults(handler = ProfileController.reload)

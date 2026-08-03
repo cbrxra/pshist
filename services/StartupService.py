@@ -69,7 +69,7 @@ function pshist {{
         return
     }}
 
-    if ($args.Count -ge 2 -and $args[0] -eq "profile" -and $args[1] -in @("use", "exit")) {{
+    if ($args.Count -ge 2 -and $args[0] -eq "profile" -and $args[1] -in @("use", "exit", "reload")) {{
         
         $historyPath = (Get-PSReadLineOption).HistorySavePath
         

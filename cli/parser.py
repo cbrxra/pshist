@@ -17,7 +17,7 @@ class Parser:
             "-v",
             "--version",
             action = "version",
-            version = "%(prog)s 0.2"
+            version = "%(prog)s 0.5"
         )
 
         self.subparsers = self.parser.add_subparsers(

@@ -80,3 +80,14 @@ class ProfileController:
             print(GREEN + f"  Perfil '{args.name}' cambiado a '{args.new_name}'" + RESET)
         except TerminalError as e:
             print(RED + f"{e}" + RESET)
+
+    @staticmethod
+    def reload(args):
+
+        try:
+            ProfileService().reload()
+            print(GREEN + "Reloading." + RESET)
+
+        except TerminalError as e:
+
+            print(RED + f"{e}" + RESET)
